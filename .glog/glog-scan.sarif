@@ -1,0 +1,91 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Glog.AI",
+          "organization": "Glog.AI",
+          "fullName": "Glog, Making software more secure",
+          "version": "1.0.0",
+          "semanticVersion": "1.0.0",
+          "informationUri": "https://www.glog.ai",
+          "rules": [
+            {
+              "id": "c8036e45-e4dc-392d-89af-7a5cc1323735",
+              "name": "High-Risk Dockerfile Vulnerability: Lack of Non-Root User Specification",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nIn Docker, the \"High-Risk Dockerfile Vulnerability: Lack of Non-Root User Specification\" vulnerability refers to the situation where a Dockerfile does not specify a non-root user for running the container. By default, Docker containers run as root, which means that if an attacker manages to break out of the container, they would have root access to the host system. This is a significant security concern.\n\n## Security Concern\n\nRunning Docker containers as root is a security concern because it gives the container full control over the host system if the container is compromised. This could lead to a variety of security issues, such as unauthorized access to sensitive data, disruption of system operations, and execution of arbitrary commands on the host system.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to always specify a non-root user in the Dockerfile that will run the container. This can be done using the `USER` instruction in the Dockerfile. Additionally, it is also recommended to follow the principle of least privilege, i.e., only grant the permissions necessary for the operation of the container.\n\n## Source Code Fix Recommendation\n\nHere is how you can specify a non-root user in your Dockerfile:\n\n```Dockerfile\n# ... other Dockerfile instructions ...\n\n# Create a non-root user 'nonroot' and switch to it\nRUN adduser --disabled-password --gecos '' nonroot\nUSER nonroot\n\n# ... other Dockerfile instructions ...\n```\n\nIn this example, the `adduser` command creates a new user named 'nonroot', and the `USER` instruction switches to this user. The container will now run as the 'nonroot' user, reducing the risk associated with running as root.\n\n## Dependencies\n\nThe code example does not have any library dependencies.\n\n## References\n\n- [CWE-250: Execution with Unnecessary Privileges](https://cwe.mitre.org/data/definitions/250.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-250",
+                    "url": "https://cwe.mitre.org/data/definitions/250.html"
+                  }
+                ],
+                "severity": "HIGH",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-250"
+                ]
+              }
+            }
+          ],
+          "language": "en-US",
+          "contents": [
+            "localizedData",
+            "nonLocalizedData"
+          ],
+          "isComprehensive": false
+        }
+      },
+      "language": "en-US",
+      "results": [
+        {
+          "ruleId": "c8036e45-e4dc-392d-89af-7a5cc1323735",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "High-Risk Dockerfile Vulnerability: Lack of Non-Root User Specification"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "apps/dotnet/tmpl/infra/Dockerfile",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1,
+                  "snippet": {
+                    "text": "ARG DOTNET_VERSION=3.1"
+                  }
+                }
+              },
+              "message": {
+                "text": "apps/dotnet/tmpl/infra/Dockerfile"
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "3627240a90214c3d5766bf8e2496d740e857d9fb5dd5d2a233d95dbbc067a1c8",
+            "glog-pfp-ruleFileCode/v1": "158fc9ac7f81f7854919e9255580ebae3c87e64a8177dbc38110e706e057a74f"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "158fc9ac7f81f7854919e9255580ebae3c87e64a8177dbc38110e706e057a74f"
+          }
+        }
+      ],
+      "newlineSequences": [
+        "\r\n",
+        "\n"
+      ]
+    }
+  ]
+}
